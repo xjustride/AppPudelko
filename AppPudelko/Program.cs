@@ -1,5 +1,4 @@
-﻿using PudelkoNamespace.PudelkoLib;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace AppPudelko
 {

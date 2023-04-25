@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PudelkoNamespace.PudelkoLib;
 using PudelkoNamespace.Enums;
 using System;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace PudelkoUnitTest
 			private static double defaultSize = 0.1; // w metrach
 			private static double accuracy = 0.001; //dokładność 3 miejsca po przecinku
 
-			private void AssertPudelko(Pudelko p, double expectedA, double expectedB, double expectedC)
+			private void AssertPudelko(Pudelko.PudelkoNamespace.Pudelko p, double expectedA, double expectedB, double expectedC)
 			{
 				Assert.AreEqual(expectedA, p.A, delta: accuracy);
 				Assert.AreEqual(expectedB, p.B, delta: accuracy);
@@ -41,7 +40,7 @@ namespace PudelkoUnitTest
 			[TestMethod, TestCategory("Constructors")]
 			public void Constructor_Default()
 			{
-				Pudelko p = new Pudelko();
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko();
 
 				Assert.AreEqual(defaultSize, p.A, delta: accuracy);
 				Assert.AreEqual(defaultSize, p.B, delta: accuracy);
@@ -56,7 +55,7 @@ namespace PudelkoUnitTest
 			public void Constructor_3params_DefaultMeters(double a, double b, double c,
 														  double expectedA, double expectedB, double expectedC)
 			{
-				Pudelko p = new Pudelko(a, b, c);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(a, b, c);
 
 				AssertPudelko(p, expectedA, expectedB, expectedC);
 			}
@@ -70,7 +69,7 @@ namespace PudelkoUnitTest
 			public void Constructor_3params_InMeters(double a, double b, double c,
 														  double expectedA, double expectedB, double expectedC)
 			{
-				Pudelko p = new Pudelko(a, b, c, type: UnitOfMeasure.meter);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(a, b, c, type: UnitOfMeasure.meter);
 
 				AssertPudelko(p, expectedA, expectedB, expectedC);
 			}
@@ -85,7 +84,7 @@ namespace PudelkoUnitTest
 			public void Constructor_3params_InCentimeters(double a, double b, double c,
 														  double expectedA, double expectedB, double expectedC)
 			{
-				Pudelko p = new Pudelko(a: a, b: b, c: c, type: UnitOfMeasure.centimeter);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(a: a, b: b, c: c, type: UnitOfMeasure.centimeter);
 
 				AssertPudelko(p, expectedA, expectedB, expectedC);
 			}
@@ -100,7 +99,7 @@ namespace PudelkoUnitTest
 			public void Constructor_3params_InMilimeters(double a, double b, double c,
 														 double expectedA, double expectedB, double expectedC)
 			{
-				Pudelko p = new Pudelko(type: UnitOfMeasure.milimeter, a: a, b: b, c: c);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(type: UnitOfMeasure.milimeter, a: a, b: b, c: c);
 
 				AssertPudelko(p, expectedA, expectedB, expectedC);
 			}
@@ -113,7 +112,7 @@ namespace PudelkoUnitTest
 			[DataRow(1.0019, 2.5999, 1.001, 2.599)]
 			public void Constructor_2params_DefaultMeters(double a, double b, double expectedA, double expectedB)
 			{
-				Pudelko p = new Pudelko(a, b);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(a, b);
 
 				AssertPudelko(p, expectedA, expectedB, expectedC: 0.1);
 			}
@@ -124,7 +123,7 @@ namespace PudelkoUnitTest
 			[DataRow(1.0019, 2.5999, 1.001, 2.599)]
 			public void Constructor_2params_InMeters(double a, double b, double expectedA, double expectedB)
 			{
-				Pudelko p = new Pudelko(A: a, B: b, type: UnitOfMeasure.meter);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(A: a, B: b, type: UnitOfMeasure.meter);
 
 				AssertPudelko(p, expectedA, expectedB, expectedC: 0.1);
 			}
@@ -135,7 +134,7 @@ namespace PudelkoUnitTest
 			[DataRow(2.0019, 0.25999, 0.02, 0.002)]
 			public void Constructor_2params_InCentimeters(double a, double b, double expectedA, double expectedB)
 			{
-				Pudelko p = new Pudelko(type: UnitOfMeasure.centimeter, A: a, B: b);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(type: UnitOfMeasure.centimeter, A: a, B: b);
 
 				AssertPudelko(p, expectedA, expectedB, expectedC: 0.1);
 			}
@@ -146,7 +145,7 @@ namespace PudelkoUnitTest
 			[DataRow(200.19, 2.5999, 0.2, 0.002)]
 			public void Constructor_2params_InMilimeters(double a, double b, double expectedA, double expectedB)
 			{
-				Pudelko p = new Pudelko(type: UnitOfMeasure.milimeter, A: a, B: b);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(type: UnitOfMeasure.milimeter, A: a, B: b);
 
 				AssertPudelko(p, expectedA, expectedB, expectedC: 0.1);
 			}
@@ -156,7 +155,7 @@ namespace PudelkoUnitTest
 			[DataRow(2.5)]
 			public void Constructor_1param_DefaultMeters(double a)
 			{
-				Pudelko p = new Pudelko(a);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(a);
 
 				Assert.AreEqual(a, p.A);
 				Assert.AreEqual(0.1, p.B);
@@ -167,7 +166,7 @@ namespace PudelkoUnitTest
 			[DataRow(2.5)]
 			public void Constructor_1param_InMeters(double a)
 			{
-				Pudelko p = new Pudelko(a);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(a);
 
 				Assert.AreEqual(a, p.A);
 				Assert.AreEqual(0.1, p.B);
@@ -180,7 +179,7 @@ namespace PudelkoUnitTest
 			[DataRow(2.0019, 0.02)]
 			public void Constructor_1param_InCentimeters(double a, double expectedA)
 			{
-				Pudelko p = new Pudelko(type: UnitOfMeasure.centimeter, A: a);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(type: UnitOfMeasure.centimeter, A: a);
 
 				AssertPudelko(p, expectedA, expectedB: 0.1, expectedC: 0.1);
 			}
@@ -191,7 +190,7 @@ namespace PudelkoUnitTest
 			[DataRow(200.19, 0.2)]
 			public void Constructor_1param_InMilimeters(double a, double expectedA)
 			{
-				Pudelko p = new Pudelko(type: UnitOfMeasure.milimeter, A: a);
+				Pudelko.PudelkoNamespace.Pudelko p = new Pudelko.PudelkoNamespace.Pudelko(type: UnitOfMeasure.milimeter, A: a);
 
 				AssertPudelko(p, expectedA, expectedB: 0.1, expectedC: 0.1);
 			}

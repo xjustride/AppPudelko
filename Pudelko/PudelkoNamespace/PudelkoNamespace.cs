@@ -1,12 +1,7 @@
-﻿using PudelkoNamespace.Enums;
-using System.Collections;
-using System.Collections.Immutable;
-using System.Data.Common;
-using System.Drawing;
-using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Globalization;
+using PudelkoNamespace.Enums;
 
-namespace PudelkoNamespace.PudelkoLib
+namespace Pudelko.PudelkoNamespace
 {
     public sealed class Pudelko 
     {
