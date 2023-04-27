@@ -65,7 +65,7 @@ namespace PudelkoNamespace.PudelkoLib
         {
             
         }
-        // every measure exceptions 
+        // every measure exceptions for tests
         public Pudelko(double A, double B, UnitOfMeasure type = UnitOfMeasure.meter) : this(A,B,10, type)
         {
             if (type == UnitOfMeasure.meter) _c /= 100;
