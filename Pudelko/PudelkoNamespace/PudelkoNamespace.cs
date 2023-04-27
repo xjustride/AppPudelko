@@ -14,7 +14,7 @@ namespace PudelkoNamespace.PudelkoLib
         private readonly double _b;
         private readonly double _c;
 
-        public int UnitOfMeasure { get; set; }
+        public UnitOfMeasure Measure { get; set; }
         
         // meter returning function "ReturnMeters"
         public static double ReturnMeters(double value, UnitOfMeasure m)
