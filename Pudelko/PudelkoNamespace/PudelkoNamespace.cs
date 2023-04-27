@@ -118,13 +118,11 @@ namespace PudelkoNamespace.PudelkoLib
         public  double A => ReturnMeters(_a, Measure);
         public  double B => ReturnMeters(_b, Measure);
         public  double C => ReturnMeters(_c, Measure);
-
+        
+        // properteis returning pole and objetosc
         public double Objetosc => Math.Round(A * B * C, 9);
         public double Pole => Math.Round((A * B * 2) + (A * C * 2) + (B * C * 2), 6);
         
-
-
-
     }
 
 }
