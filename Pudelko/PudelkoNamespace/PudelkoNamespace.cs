@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Data.Common;
 using System.Drawing;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace PudelkoNamespace.PudelkoLib
@@ -57,6 +58,11 @@ namespace PudelkoNamespace.PudelkoLib
             _b = b;
             _c = c;
             Measure = type;
+        }
+        // second constructor for tests
+        public Pudelko(double A, double B, double C) : this(A, B, C, UnitOfMeasure.meter)
+        {
+            
         }
 
 
