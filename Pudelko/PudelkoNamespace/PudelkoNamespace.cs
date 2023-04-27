@@ -16,7 +16,7 @@ namespace PudelkoNamespace.PudelkoLib
 
         public int UnitOfMeasure { get; set; }
         
-        // meter returning function
+        // meter returning function "ReturnMeters"
         public static double ReturnMeters(double value, UnitOfMeasure m)
         {
             if (m == UnitOfMeasure.meter)
