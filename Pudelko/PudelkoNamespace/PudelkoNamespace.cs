@@ -59,11 +59,69 @@ namespace PudelkoNamespace.PudelkoLib
             _c = c;
             Measure = type;
         }
+        
         // second constructor for tests
         public Pudelko(double A, double B, double C) : this(A, B, C, UnitOfMeasure.meter)
         {
             
         }
+        // every measure exceptions 
+        public Pudelko(double A, double B, UnitOfMeasure type = UnitOfMeasure.meter) : this(A,B,10, type)
+        {
+            if (type == UnitOfMeasure.meter) _c /= 100;
+
+            if (type == UnitOfMeasure.milimeter) _c *= 10;
+        }
+
+        public Pudelko(double A, double B) : this(A, B, 10, UnitOfMeasure.meter)
+        {
+            _c /= 100;
+        }
+
+        public Pudelko(double A) : this(A, 10, 10, UnitOfMeasure.meter)
+        {
+            _c /= 100;
+            _b /= 100;
+        }
+
+        public Pudelko(double A, UnitOfMeasure type = UnitOfMeasure.centimeter) : this(A, 10, 10, type)
+        {
+            if (type == UnitOfMeasure.meter)
+            {
+                _c /= 100;
+                _b /= 100;
+            }
+            else if (type == UnitOfMeasure.milimeter)
+            {
+                _c *=  10;
+                _b *= 10;
+            }
+        }
+
+        public Pudelko(UnitOfMeasure type = UnitOfMeasure.centimeter) : this(10, 10, 10, type)
+        {
+            if (type == UnitOfMeasure.meter)
+            {
+                _c /= 100;
+                _b /= 100;
+                _a /= 100;
+                
+            }
+            else if (type == UnitOfMeasure.milimeter)
+            {
+                _c *= 10;
+                _b *= 10;
+                _a *= 10;
+            }
+        }
+        // returning A,B,C method
+        public  double A => ReturnMeters(_a, Measure);
+        public  double B => ReturnMeters(_b, Measure);
+        public  double C => ReturnMeters(_c, Measure);
+
+        public double Objetosc => Math.Round(A * B * C, 9);
+        public double Pole => Math.Round((A * B * 2) + (A * C * 2) + (B * C * 2), 6);
+        
 
 
 
