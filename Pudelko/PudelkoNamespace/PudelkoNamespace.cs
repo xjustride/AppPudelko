@@ -117,21 +117,28 @@ namespace PudelkoNamespace.PudelkoLib
         public  double A => ReturnMeters(_a, Measure);
         public  double B => ReturnMeters(_b, Measure);
         public  double C => ReturnMeters(_c, Measure);
-        
-        // string inplementation
-        public string ToString(string? format = "m", IFormatProvider? provider = default)
-        {
-            if (format is null)
-                format = "m";
 
-			return format.ToLower() switch
+		// string inplementation
+		public string ToString(string? format, IFormatProvider? provider)
+		{
+			if (format is null)
+				format = "m";
+
+			switch (format.ToLower())
 			{
-				"m" => $"{A:F3} {format} × {B:F3} {format} × {C:F3} {format}",
-				("cm") => $"{A * 100:F1} {format} × {B * 100:F1} {format} × {C * 100:F1} {format}",
-				("mm") => $"{A * 1000:F0} {format} × {B * 1000:F0} {format} × {C * 1000:F0} {format}",
-				_ => throw new FormatException(),
-			};
+				case "":
+				case "m":
+					return $"{A:F3} {format} × {B:F3} {format} × {C:F3} {format}";
+				case "cm":
+					return $"{A * 100:F1} {format} × {B * 100:F1} {format} × {C * 100:F1} {format}";
+				case "mm":
+					return $"{A * 1000:F0} {format} × {B * 1000:F0} {format} × {C * 1000:F0} {format}";
+				default:
+					throw new FormatException($"The '{format}' format string is not supported.");
+			}
 		}
+
+
 		// equals
 
 		public bool Equals(Pudelko? other)
