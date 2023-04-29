@@ -183,16 +183,13 @@ namespace PudelkoNamespace.PudelkoLib
 		// box stacking operator
 		public static Pudelko operator +(Pudelko p1, Pudelko p2)
 		{
-			double x = Math.Min(p1.A, p2.A);
-			double y = Math.Min(p1.B, p2.B);
-			double z = Math.Min(p1.C, p2.C);
-            
-			double xDiff = Math.Max(p1.A, p2.A) - x;
-			double yDiff = Math.Max(p1.B, p2.B) - y;
-			double zDiff = Math.Max(p1.C, p2.C) - z;
+			double x = Math.Max(p1.A, p2.A);
+			double y = Math.Max(p1.B, p2.B);
+			double z = Math.Max(p1.C, p2.C);
 
-			return new Pudelko(x + xDiff, y + yDiff, z + zDiff);
+			return new Pudelko(x, y, z);
 		}
+
 
 
 
