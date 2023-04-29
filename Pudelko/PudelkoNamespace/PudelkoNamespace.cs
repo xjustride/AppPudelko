@@ -169,15 +169,26 @@ namespace PudelkoNamespace.PudelkoLib
 			return !m1.Equals(m2);
 		}
 
-
-
-
-
 		// properteis returning pole and objetosc
 		public double Objetosc => Math.Round(A * B * C, 9);
         public double Pole => Math.Round((A * B * 2) + (A * C * 2) + (B * C * 2), 6);
-        
-        
-       
-    }
+
+		// box stacking operator
+		public static Pudelko operator +(Pudelko p1, Pudelko p2)
+		{
+			double x = Math.Min(p1.A, p2.A);
+			double y = Math.Min(p1.B, p2.B);
+			double z = Math.Min(p1.C, p2.C);
+            
+			double xDiff = Math.Max(p1.A, p2.A) - x;
+			double yDiff = Math.Max(p1.B, p2.B) - y;
+			double zDiff = Math.Max(p1.C, p2.C) - z;
+
+			return new Pudelko(x + xDiff, y + yDiff, z + zDiff);
+		}
+
+
+
+
+	}
 }
