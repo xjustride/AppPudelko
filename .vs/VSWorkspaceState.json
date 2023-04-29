@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Pudelko",
+    "\\Pudelko\\PudelkoNamespace"
   ],
+  "SelectedNode": "\\Pudelko\\PudelkoNamespace\\PudelkoNamespace.cs",
   "PreviewInSolutionExplorer": false
 }

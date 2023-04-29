@@ -9,14 +9,13 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace PudelkoNamespace.PudelkoLib
 {
-    public sealed class Pudelko
-    {
+    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>
+	{
         private readonly double _a;
         private readonly double _b;
         private readonly double _c;
 
         public UnitOfMeasure Measure { get; set; }
-
 
         // meter returning function "ReturnMeters"
         public static double ReturnMeters(double value, UnitOfMeasure m)
@@ -119,10 +118,66 @@ namespace PudelkoNamespace.PudelkoLib
         public  double B => ReturnMeters(_b, Measure);
         public  double C => ReturnMeters(_c, Measure);
         
-        // properteis returning pole and objetosc
-        public double Objetosc => Math.Round(A * B * C, 9);
+        // string inplementation
+        public string ToString(string? format = "m", IFormatProvider? provider = default)
+        {
+            if (format is null)
+                format = "m";
+
+			return format.ToLower() switch
+			{
+				"m" => $"{A:F3} {format} × {B:F3} {format} × {C:F3} {format}",
+				("cm") => $"{A * 100:F1} {format} × {B * 100:F1} {format} × {C * 100:F1} {format}",
+				("mm") => $"{A * 1000:F0} {format} × {B * 1000:F0} {format} × {C * 1000:F0} {format}",
+				_ => throw new FormatException(),
+			};
+		}
+		// equals
+
+		public bool Equals(Pudelko? other)
+		{
+			if (other is null)
+				return false;
+			if (Object.ReferenceEquals(this, other))
+				return true;
+
+			double[] p1 = { A, B, C };
+			Array.Sort(p1);
+			double[] p2 = { other.A, other.B, other.C };
+			Array.Sort(p2);
+
+			return (p1[0] == p2[0] && p1[1] == p2[1] && p1[2] == p2[2]);
+		}
+
+		public override bool Equals(object? obj)
+		{
+			if (obj is Pudelko)
+				return Equals((Pudelko)obj);
+			else
+				return false;
+		}
+
+		public override int GetHashCode() => (A, B, C).GetHashCode();
+
+		public static bool operator ==(Pudelko m1, Pudelko m2)
+		{
+			return m1.Equals(m2);
+		}
+
+		public static bool operator !=(Pudelko m1, Pudelko m2)
+		{
+			return !m1.Equals(m2);
+		}
+
+
+
+
+
+		// properteis returning pole and objetosc
+		public double Objetosc => Math.Round(A * B * C, 9);
         public double Pole => Math.Round((A * B * 2) + (A * C * 2) + (B * C * 2), 6);
         
+        
+       
     }
-
 }
