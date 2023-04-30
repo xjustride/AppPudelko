@@ -56,11 +56,12 @@ namespace Pudełko
 				Console.WriteLine(item);
 
 			//Parsowanie
-			Pudelko p7 = Pudelko.Parse("250.0 cm × 932.1 cm × 10.0 cm");
-			Console.WriteLine(p5.ToString("cm"));
+			Pudelko ss = Pudelko.Parse("1 m x 1 m x 1 m");
+			Pudelko sss = new(8, 1, 1);
+			Console.WriteLine(ss + sss);
 
 			//Kompresja
-			Pudelko p8 = p7.Kompresuj();
+			Pudelko p8 = ss.Kompresuj();
 			Console.WriteLine(p8.ToString());
 
 			//Sortowanie pudełek
