@@ -187,7 +187,7 @@ namespace PudelkoNamespace.PudelkoLib
 			double[] pudelko2 = { p2.A, p2.B, p2.C };
 			Array.Sort(pudelko1);
 			Array.Sort(pudelko2);
-
+			
 			double x, y, z;
 			x = pudelko1[0] + pudelko2[0];
 			if (pudelko1[1] > pudelko2[1])
@@ -201,6 +201,12 @@ namespace PudelkoNamespace.PudelkoLib
 
 			return new Pudelko(x, y, z);
 		}
+
+		// conversion method 
+		public static explicit operator double[](Pudelko pudelko) => new double[] { pudelko.A, pudelko.B, pudelko.C };
+		public static implicit operator Pudelko((int a, int b, int c) krawedzie) => new Pudelko((double)krawedzie.a / 1000, (double)krawedzie.b / 1000, (double)krawedzie.c / 1000);
+
+		// parsing method 
 		public static Pudelko Parse(string text)
 		{
 			var values = text.Split(' ', 'x');
@@ -242,7 +248,7 @@ namespace PudelkoNamespace.PudelkoLib
 				"m" => 1.0,
 				"cm" => 0.01,
 				"mm" => 0.001,
-				_ => throw new ArgumentException($"Unknown unit: {unit}"),
+				_ => throw new ArgumentException($"Unknown unit: {unit}")
 			};
 		}
 	}
