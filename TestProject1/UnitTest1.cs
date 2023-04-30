@@ -426,7 +426,6 @@ namespace PudelkoUnitTest
 
 			#region ToString tests ===================================
 
-
 			[TestMethod, TestCategory("String representation")]
 			public void ToString_Default_Culture_EN()
 			{
@@ -527,16 +526,17 @@ namespace PudelkoUnitTest
 
 			#region Operators overloading ===========================
 			// przeci��enia operator�w == i != napisa�em przy okazji testowania metody Equals
-			[DataTestMethod, TestCategory("Plus operator test")]
-			[DataRow(2, 2, 2, 2, 2, 2, 4, 2, 2)]
-			[DataRow(7, 8, 2, 8, 1, 1, 8, 2, 8)]
-			public void Operator_Plus_Test(double a, double b, double c, double a1, double b1, double c1, double a2, double b2, double c2)
+			[TestMethod]
+			public void UnitTests_overloading_PlusSign()
 			{
-				Pudelko x = new Pudelko(a, b, c, UnitOfMeasure.meter);
-				Pudelko y = new Pudelko(a1, b1, c1, UnitOfMeasure.meter);
-				Pudelko z = new Pudelko(a2, b2, c2, UnitOfMeasure.meter);
+				Pudelko p1 = new Pudelko(1, 2, 3);
+				Pudelko p2 = new Pudelko(4, 5, 6);
 
-				Assert.IsTrue(z.Equals(x + y));
+				Pudelko oczekiwane = new Pudelko(5, 5, 6);
+
+				Pudelko aktualne = p1 + p2;
+
+				Assert.AreEqual(oczekiwane, aktualne);
 			}
 
 			#endregion
@@ -591,18 +591,18 @@ namespace PudelkoUnitTest
 			#endregion
 
 			#region Parsing =========================================
-			//                 Pudelko ss = Pudelko.Parse("1 m x 1 m x 1 m");
+			Pudelko ss = Pudelko.Parse("1 m x 1 m x 1 m");
 
-			//[DataTestMethod]
-			//[TestCategory("Parsing Test Method")]
-			//[DataRow(1, 1, 1)]
-			//public void Parsing(double a, double b, double c)
-			//{
-			//	Pudelko abc = new(a, b, c, UnitOfMeasure.meter);
-			//	Pudelko abcstring = Pudelko.Parse($"{a} m x {b} m x {c} m");
+			[DataTestMethod]
+			[TestCategory("Parsing Test Method")]
+			[DataRow(1, 1, 1)]
+			public void Parsing(double a, double b, double c)
+			{
+				Pudelko abc = new(a, b, c, UnitOfMeasure.meter);
+				Pudelko abcstring = Pudelko.Parse($"{a} m x {b} m x {c} m");
 
-			//	Assert.IsTrue(abc.Equals(abcstring));
-			//}
+				Assert.IsTrue(abc.Equals(abcstring));
+			}
 
 
 			#endregion

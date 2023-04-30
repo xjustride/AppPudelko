@@ -183,16 +183,67 @@ namespace PudelkoNamespace.PudelkoLib
 		// box stacking operator
 		public static Pudelko operator +(Pudelko p1, Pudelko p2)
 		{
-			double x = Math.Max(p1.A, p2.A);
-			double y = Math.Max(p1.B, p2.B);
-			double z = Math.Max(p1.C, p2.C);
+			double[] pudelko1 = { p1.A, p1.B, p1.C };
+			double[] pudelko2 = { p2.A, p2.B, p2.C };
+			Array.Sort(pudelko1);
+			Array.Sort(pudelko2);
+
+			double x, y, z;
+			x = pudelko1[0] + pudelko2[0];
+			if (pudelko1[1] > pudelko2[1])
+				y = pudelko1[1];
+			else
+				y = pudelko2[1];
+			if (pudelko1[2] > pudelko2[2])
+				z = pudelko1[2];
+			else
+				z = pudelko2[2];
 
 			return new Pudelko(x, y, z);
 		}
+		public static Pudelko Parse(string text)
+		{
+			var values = text.Split(' ', 'x');
+			string[] valuesTemp = new string[6];
 
+			int i = 0;
+			foreach (var val in values)
+			{
+				if (!string.IsNullOrWhiteSpace(val))
+				{
+					valuesTemp[i++] = val;
+				}
+			}
 
+			if (valuesTemp.Length != 6)
+			{
+				throw new ArgumentException("Invalid text format", nameof(text));
+			}
 
+			double.TryParse(valuesTemp[0], out double a);
+			double.TryParse(valuesTemp[2], out double b);
+			double.TryParse(valuesTemp[4], out double c);
 
+			string unitA = valuesTemp[1];
+			string unitB = valuesTemp[3];
+			string unitC = valuesTemp[5];
 
+			return new Pudelko(
+				a * ParseUnit(unitA),
+				b * ParseUnit(unitB),
+				c * ParseUnit(unitC)
+			);
+		}
+
+		private static double ParseUnit(string unit)
+		{
+			return unit switch
+			{
+				"m" => 1.0,
+				"cm" => 0.01,
+				"mm" => 0.001,
+				_ => throw new ArgumentException($"Unknown unit: {unit}"),
+			};
+		}
 	}
 }

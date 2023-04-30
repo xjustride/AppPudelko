@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Pudelko",
-    "\\Pudelko\\PudelkoNamespace"
+    "\\Pudelko\\PudelkoNamespace",
+    "\\TestProject1"
   ],
-  "SelectedNode": "\\Pudelko\\PudelkoNamespace\\PudelkoNamespace.cs",
+  "SelectedNode": "\\TestProject1\\UnitTest1.cs",
   "PreviewInSolutionExplorer": false
 }
