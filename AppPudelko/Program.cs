@@ -5,60 +5,100 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System;
+using ExtensionMethod;
 using PudelkoNamespace.Enums;
 using PudelkoNamespace.PudelkoLib;
-using System.Globalization;
 
 namespace Pudełko
 {
+	public delegate int Comparison<Pudelko>(Pudelko p1, Pudelko p2);
 
 	class Program
 	{
-		public static void Main(string[] args)
+		static void Main(string[] args)
 		{
-			try
+			//Tworzenie obiektów klasy Pudelko
+			Pudelko p1 = new Pudelko(54, 54, 54, UnitOfMeasure.centimeter);
+			Pudelko p2 = new Pudelko(0.7, 42, UnitOfMeasure.centimeter);
+			Pudelko p3 = new Pudelko(19.3, 9, 15, UnitOfMeasure.centimeter);
+			Pudelko p4 = new Pudelko(4, 5, 6);
+			Pudelko p5 = new Pudelko(2, 3, 1, UnitOfMeasure.meter);
+			Pudelko p10 = new Pudelko(3, 1, 2, UnitOfMeasure.meter);
+
+			//Wyświetlanie informacji o pudełkach
+			Console.WriteLine(p1.ToString());
+			Console.WriteLine(p2.ToString());
+			Console.WriteLine(p3.ToString());
+			Console.WriteLine(p4.ToString());
+			Console.WriteLine(p5.ToString());
+			Console.WriteLine(p10.ToString());
+
+			//Wyświetlanie informacji o pudełkach w różnych jednostkach
+			Console.WriteLine(p5.ToString("cm"));
+			Console.WriteLine(p5.ToString("mm"));
+			Console.WriteLine(p1.ToString(null));
+
+			//Wyświetlanie pola i objętości pudełek
+			Console.WriteLine("P = " + p1.Pole);
+			Console.WriteLine("V = " + p1.Objetosc);
+
+			//Porównywanie pudełek
+			Console.WriteLine(p5 == p10);
+			Console.WriteLine(p1.Equals(p2));
+
+			//Dodawanie pudełek
+			Console.WriteLine(p1 + p2);
+
+			//Indexer i iterator
+			Console.WriteLine("p2[1] = " + p2[1]);
+			Console.WriteLine("p3: ");
+			foreach (var item in p3)
+				Console.WriteLine(item);
+
+			//Parsowanie
+			Pudelko p7 = Pudelko.Parse("250.0 cm × 932.1 cm × 10.0 cm");
+			Console.WriteLine(p5.ToString("cm"));
+
+			//Kompresja
+			Pudelko p8 = p7.Kompresuj();
+			Console.WriteLine(p8.ToString());
+
+			//Sortowanie pudełek
+			List<Pudelko> boxes = new List<Pudelko>();
+			boxes.Add(new Pudelko(2, 3, 9));
+			boxes.Add(new Pudelko(1.5, 2, 3));
+			boxes.Add(new Pudelko(8, 4, 5));
+			boxes.Add(new Pudelko(1, 2, 2.5));
+			boxes.Add(new Pudelko(3, 6, 4));
+
+
+			Console.WriteLine("Nieposortowane");
+			foreach (Pudelko box in boxes)
+				Console.WriteLine(box);
+
+			boxes.Sort(delegate (Pudelko p1, Pudelko p2)
 			{
-				//dla pudełka o wymiarach kolejno 2.5, 9.321 i 0.1, ToString("mm") zwraca napis "2500 mm × 9321 mm × 100 mm"
-
-				CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
-
-				Pudelko pudlo = new();
-
-				List<Pudelko> list = new();
-				list.Add(new Pudelko(5, 3, 2, UnitOfMeasure.meter));
-				list.Add(new Pudelko(0.03, 0.01, 0.01, UnitOfMeasure.meter));
-
-
-
-
-
-				foreach (Pudelko p in list)
+				if (p1.Objetosc != p2.Objetosc)
+					return (p1.Objetosc.CompareTo(p2.Objetosc));
+				else
 				{
-					Console.WriteLine($"{p}, obj: {p.Objetosc}, pole: {p.Pole}, sumakrawedzi: {p.SumaKrawedzi}.");
+					if (p1.Pole != p2.Pole)
+						return (p1.Pole.CompareTo(p2.Pole));
+					else
+					{
+						if ((p1.A + p1.B + p1.C) != (p2.A + p2.B + p2.C))
+							return (p1.A + p1.B + p1.C).CompareTo(p2.A + p2.B + p2.C);
+						else return 0;
+					}
 				}
+			});
 
-				list.Sort(new Pudelko());
+			Console.WriteLine("Posortowane");
+			foreach (Pudelko box in boxes)
+				Console.WriteLine(box);
 
-				Console.WriteLine();
-				foreach (Pudelko p in list)
-				{
-					Console.WriteLine($"{p}, obj: {p.Objetosc}, pole: {p.Pole}, sumakrawedzi: {p.SumaKrawedzi}.");
-				}
-
-				Pudelko ss = Pudelko.Parse("1 m x 1 m x 1 m");
-				Pudelko sss = new(8, 1, 1);
-				Console.WriteLine(ss + sss);
-
-
-				Console.WriteLine(sss.ToString("cm"));
-
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.ToString());
-			}
+			Console.ReadKey();
 		}
 
 	}
-		
 }
